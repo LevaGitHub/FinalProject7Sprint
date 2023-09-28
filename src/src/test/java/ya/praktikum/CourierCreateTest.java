@@ -1,17 +1,23 @@
 package ya.praktikum;
 
 import io.restassured.RestAssured;
+import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
+import ya.praktikum.courier.CourierChecker;
 import ya.praktikum.courier.CourierGenerator;
 import ya.praktikum.courier.CourierHelper;
 import ya.praktikum.model.Courier;
+import ya.praktikum.model.User;
 
 import static io.restassured.RestAssured.given;
 
 public class CourierCreateTest {
 
-    CourierHelper courierHelper = new CourierHelper();
-    CourierGenerator courierGenerator = new CourierGenerator();
+    private final CourierHelper courierHelper = new CourierHelper();
+    private final CourierGenerator courierGenerator = new CourierGenerator();
+    private final CourierChecker courierChecker = new CourierChecker();
+    private int courierId;
+
     @Test
     public void getMyInfoStatusCodeMesto() {
         RestAssured.baseURI = "https://qa-mesto.praktikum-services.ru";
@@ -38,6 +44,13 @@ public class CourierCreateTest {
         //        RestAssured.baseURI = uri;
         Courier courierData = courierGenerator.getRandom();
         courierHelper.create(courierData).statusCode(201);
+
+        User userData = User.from(courierData);
+        ValidatableResponse loginResponse = courierHelper.login(userData);
+        courierId = courierChecker.extractCourierId(loginResponse);
+        courierHelper.delete(courierId);
+
+
 //        given().log().all()
 //                .contentType(ContentType.JSON)
 //                .body(courierData)
