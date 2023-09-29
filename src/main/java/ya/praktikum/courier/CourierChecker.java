@@ -2,9 +2,6 @@ package ya.praktikum.courier;
 
 import io.restassured.response.ValidatableResponse;
 
-import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
-import static java.net.HttpURLConnection.HTTP_OK;
-import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.*;
 import static ya.praktikum.Constants.*;

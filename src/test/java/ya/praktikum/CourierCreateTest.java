@@ -8,8 +8,6 @@ import ya.praktikum.courier.CourierHelper;
 import ya.praktikum.model.Courier;
 import ya.praktikum.model.User;
 
-import static ya.praktikum.Constants.*;
-
 public class CourierCreateTest {
 
     private final CourierHelper courierHelper = new CourierHelper();

@@ -5,8 +5,6 @@ import ya.praktikum.BaseRequest;
 import ya.praktikum.model.Courier;
 import ya.praktikum.model.User;
 
-import java.util.UUID;
-
 public class CourierHelper extends BaseRequest {
     protected final String CREATE_COURIER_METHOD_PATH = "/courier";
     protected final String LOGIN_COURIER_METHOD_PATH = "/courier/login";
