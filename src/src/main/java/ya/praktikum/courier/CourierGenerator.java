@@ -13,10 +13,22 @@ public class CourierGenerator {
     }
 
     public Courier getRandom() {
-        UUID uuid = UUID.randomUUID();
         return new Courier(
-                "java_autotest_login_" + uuid,
-                "java_autotest_password_" + uuid,
-                "java_autotest_first_name_" + uuid);
+                getRandomLogin(),
+                getRandomPassword(),
+                getRandomFirstName());
     }
+
+    public String getRandomLogin(){
+        return "java_autotest_login_" + UUID.randomUUID();
+    }
+
+    public String getRandomPassword(){
+        return "java_autotest_password_" + UUID.randomUUID();
+    }
+
+    public String getRandomFirstName(){
+        return "java_autotest_first_name_" + UUID.randomUUID();
+    }
+
 }
