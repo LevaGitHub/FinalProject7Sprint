@@ -26,3 +26,6 @@ replay_pid*
 *.iws
 *.iml
 *.ipr
+
+.target/
+/target/
