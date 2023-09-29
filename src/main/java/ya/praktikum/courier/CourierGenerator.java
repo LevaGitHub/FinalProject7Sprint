@@ -5,6 +5,7 @@ import ya.praktikum.model.Courier;
 import java.util.UUID;
 
 public class CourierGenerator {
+
     public Courier getExistsCourier() {
         return new Courier(
                 "java_autotest_login_exists",

@@ -1,6 +1,7 @@
 package ya.praktikum;
 
 import io.restassured.response.ValidatableResponse;
+import org.junit.After;
 import org.junit.Test;
 import ya.praktikum.courier.CourierChecker;
 import ya.praktikum.courier.CourierGenerator;
@@ -13,13 +14,13 @@ public class CourierCreateTest {
     private final CourierHelper courierHelper = new CourierHelper();
     private final CourierGenerator courierGenerator = new CourierGenerator();
     private final CourierChecker courierChecker = new CourierChecker();
+    private int courierId;
 
-
-    private void cleanTestData(Courier courierData){
-        User userData = User.from(courierData);
-        ValidatableResponse loginResponse = courierHelper.login(userData);
-        int courierId = courierChecker.extractCourierId(loginResponse);
-        courierHelper.delete(courierId);
+    @After
+    public void cleanTestData(){
+        if (courierId > 0) {
+            courierHelper.delete(courierId);
+        }
     }
 
 
@@ -28,7 +29,7 @@ public class CourierCreateTest {
         Courier courierData = courierGenerator.getRandom();
         ValidatableResponse createResponse = courierHelper.create(courierData);
         courierChecker.creationSuccess(createResponse);
-        cleanTestData(courierData);
+        courierId = courierHelper.getCourierId(courierData);
     }
 
 
@@ -38,7 +39,7 @@ public class CourierCreateTest {
         courierHelper.create(courierData);
         ValidatableResponse createResponse = courierHelper.create(courierData);
         courierChecker.creationFailedConflict(createResponse);
-        cleanTestData(courierData);
+        courierId = courierHelper.getCourierId(courierData);
     }
 
 
@@ -78,7 +79,7 @@ public class CourierCreateTest {
         courierData.setFirstName(null);
         ValidatableResponse createResponse =courierHelper.create(courierData);
         courierChecker.creationSuccess(createResponse);
-        cleanTestData(courierData);
+        courierId = courierHelper.getCourierId(courierData);
     }
 
 }

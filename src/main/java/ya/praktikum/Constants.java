@@ -8,5 +8,6 @@ public class Constants {
     public static final int STATUS_CODE_201 = 201;
 
     public static final int STATUS_CODE_400 = 400;
+    public static final int STATUS_CODE_404 = 404;
     public static final int STATUS_CODE_409 = 409;
 }

@@ -33,4 +33,17 @@ public class CourierHelper extends BaseRequest {
                 .delete(CREATE_COURIER_METHOD_PATH + "/" + courierId)
                 .then().log().all();
     }
+
+    public int getCourierId(Courier courierData){
+        User userData = User.from(courierData);
+        ValidatableResponse loginResponse = login(userData);
+        return extractCourierId(loginResponse);
+
+    };
+
+    public int extractCourierId(ValidatableResponse response) {
+        return response
+                .extract()
+                .path("id");
+    }
 }
