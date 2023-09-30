@@ -1,21 +1,22 @@
 package ya.praktikum;
 
 import io.restassured.RestAssured;
+import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
+import ya.praktikum.model.Order;
+import ya.praktikum.order.OrderChecker;
+import ya.praktikum.order.OrderHelper;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class OrderListTest {
+    private final OrderHelper orderHelper = new OrderHelper();
+    private final OrderChecker orderChecker = new OrderChecker();
 
+    @Test
     public void getOrderList(){
-        String method = "/api/v1/orders";
-        String uri = "https://qa-scooter.praktikum-services.ru/";
-        RestAssured.baseURI = uri;
-        given().log().all()
-                .get(method)
-                .then().log().all()
-                .assertThat().body("orders", notNullValue())
-                .statusCode(200);
+        ValidatableResponse getOrderListResponse = orderHelper.getOrderList();
+        orderChecker.getOrderListSuccess(getOrderListResponse);
     }
 }

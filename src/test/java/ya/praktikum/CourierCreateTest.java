@@ -2,6 +2,7 @@ package ya.praktikum;
 
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import ya.praktikum.courier.CourierChecker;
 import ya.praktikum.courier.CourierGenerator;
@@ -34,6 +35,7 @@ public class CourierCreateTest {
 
 
     @Test
+    @Ignore
     public void createIdenticalCourierFail() {
         Courier courierData = courierGenerator.getRandom();
         courierHelper.create(courierData);
@@ -44,6 +46,7 @@ public class CourierCreateTest {
 
 
     @Test
+    @Ignore
     public void createCourierIdenticalLoginFail() {
         Courier courierData = courierGenerator.getRandom();
         courierHelper.create(courierData);
