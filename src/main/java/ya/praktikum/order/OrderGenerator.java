@@ -1,5 +1,6 @@
 package ya.praktikum.order;
 
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import ya.praktikum.model.Order;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 public class OrderGenerator {
 
+    @Step("Генерация уникальных данных заказа")
     public Order getRandom() {
         UUID uuid = UUID.randomUUID();
 

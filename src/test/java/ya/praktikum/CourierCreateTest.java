@@ -1,5 +1,8 @@
 package ya.praktikum;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Ignore;
@@ -18,6 +21,7 @@ public class CourierCreateTest {
     private int courierId;
 
     @After
+    @Step("Очистка тестовых данных")
     public void cleanTestData(){
         if (courierId > 0) {
             courierHelper.delete(courierId);
@@ -26,6 +30,8 @@ public class CourierCreateTest {
 
 
     @Test
+    @DisplayName("Create courier")
+    @Description("Проверка создания курьера с корректными данными")
     public void createCourierSuccess() {
         Courier courierData = courierGenerator.getRandom();
         ValidatableResponse createResponse = courierHelper.create(courierData);
@@ -35,7 +41,8 @@ public class CourierCreateTest {
 
 
     @Test
-    @Ignore
+    @DisplayName("Create identical courier")
+    @Description("Проверка невозможности создания двух одинаковых курьеров")
     public void createIdenticalCourierFail() {
         Courier courierData = courierGenerator.getRandom();
         courierHelper.create(courierData);
@@ -46,7 +53,8 @@ public class CourierCreateTest {
 
 
     @Test
-    @Ignore
+    @DisplayName("Create identical login courier")
+    @Description("Проверка невозможности создания двух курьеров с одинаковым логином")
     public void createCourierIdenticalLoginFail() {
         Courier courierData = courierGenerator.getRandom();
         courierHelper.create(courierData);
@@ -59,6 +67,8 @@ public class CourierCreateTest {
 
 
     @Test
+    @DisplayName("Create courier without login")
+    @Description("Проверка создания курьера с пустым полем Логин")
     public void createCourierWithoutLoginFail() {
         Courier courierData = courierGenerator.getRandom();
         courierData.setLogin(null);
@@ -68,6 +78,8 @@ public class CourierCreateTest {
 
 
     @Test
+    @DisplayName("Create courier without password")
+    @Description("Проверка создания курьера с пустым полем Пароль")
     public void createCourierWithoutPasswordFail() {
         Courier courierData = courierGenerator.getRandom();
         courierData.setPassword(null);
@@ -77,6 +89,8 @@ public class CourierCreateTest {
 
 
     @Test
+    @DisplayName("Create courier without firstname")
+    @Description("Проверка создания курьера с пустым полем Фамилия")
     public void createCourierWithoutFirstNameSuccess() {
         Courier courierData = courierGenerator.getRandom();
         courierData.setFirstName(null);

@@ -1,5 +1,6 @@
 package ya.praktikum.courier;
 
+import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import ya.praktikum.BaseRequest;
 import ya.praktikum.model.Courier;
@@ -9,6 +10,7 @@ public class CourierHelper extends BaseRequest {
     protected final String CREATE_COURIER_METHOD_PATH = "/courier";
     protected final String LOGIN_COURIER_METHOD_PATH = "/courier/login";
 
+    @Step("Отправка запроса на создание курьера")
     public ValidatableResponse create(Courier courier) {
         return sendBaseRequest()
                 .body(courier)
@@ -17,6 +19,7 @@ public class CourierHelper extends BaseRequest {
                 .then().log().all();
     }
 
+    @Step("Отправка запроса на авторизацию курьера")
     public ValidatableResponse login(User user) {
         return sendBaseRequest()
                 .body(user)
@@ -25,6 +28,7 @@ public class CourierHelper extends BaseRequest {
                 .then().log().all();
     }
 
+    @Step("Отправка запроса на удаление курьера")
     public ValidatableResponse delete(int courierId) {
         String json = String.format("{\"id\": \"%d\"}", courierId);
         return sendBaseRequest()
@@ -40,7 +44,7 @@ public class CourierHelper extends BaseRequest {
         return extractCourierId(loginResponse);
 
     };
-
+    @Step("Получение id курьера")
     public int extractCourierId(ValidatableResponse response) {
         return response
                 .extract()

@@ -1,5 +1,7 @@
 package ya.praktikum.model;
 
+import io.qameta.allure.Step;
+
 import java.util.List;
 
 public class Order {
@@ -8,6 +10,7 @@ public class Order {
         return color;
     }
 
+    @Step("Изменение цвета самоката")
     public void setColor(List<String> color) {
         this.color = color;
     }

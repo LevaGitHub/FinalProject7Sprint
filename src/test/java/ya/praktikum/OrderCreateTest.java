@@ -1,5 +1,8 @@
 package ya.praktikum;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Ignore;
@@ -44,6 +47,7 @@ public class OrderCreateTest {
     }
 
     @After
+    @Step("Очистка тестовых данных")
     public void cleanTestData(){
         if (orderId > 0) {
             orderHelper.cancel(orderId);
@@ -52,6 +56,8 @@ public class OrderCreateTest {
 
 
     @Test
+    @DisplayName("Create order")
+    @Description("Проверка создания заказа с корректными данными")
     public void createOrderSuccess() {
         Order orderData = orderGenerator.getRandom();
         orderData.setColor(colorList);

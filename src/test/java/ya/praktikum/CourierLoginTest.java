@@ -1,5 +1,7 @@
 package ya.praktikum;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Ignore;
@@ -27,6 +29,8 @@ public class CourierLoginTest {
 
 
     @Test
+    @DisplayName("Login exists courier")
+    @Description("Проверка возможности авторизации ранее созданного курьера")
     public void loginExistsCourierSuccess() {
         Courier courierData = courierGenerator.getExistsCourier();
         User userData = User.from(courierData);
@@ -35,6 +39,8 @@ public class CourierLoginTest {
     }
 
     @Test
+    @DisplayName("Login new courier")
+    @Description("Проверка возможности авторизации вновь созданного курьера")
     public void loginNewCourierSuccess() {
         Courier courierData = courierGenerator.getRandom();
         courierHelper.create(courierData);
@@ -45,6 +51,8 @@ public class CourierLoginTest {
     }
 
     @Test
+    @DisplayName("Login courier without login")
+    @Description("Проверка невозможности авторизации курьера без обязательного поля Логин")
     public void loginCourierWitoutLoginFail() {
         User userData = new User(null, courierGenerator.getRandomPassword());
         ValidatableResponse loginResponse = courierHelper.login(userData);
@@ -52,7 +60,8 @@ public class CourierLoginTest {
     }
 
     @Test
-    @Ignore
+    @DisplayName("Login courier without login")
+    @Description("Проверка невозможности авторизации курьера без обязательного поля Пароль")
     public void loginCourierWitoutPasswordFail() {
         User userData = new User(courierGenerator.getRandomLogin(), null);
         ValidatableResponse loginResponse = courierHelper.login(userData);
@@ -61,6 +70,8 @@ public class CourierLoginTest {
 
 
     @Test
+    @DisplayName("Login courier with incorrect login")
+    @Description("Проверка невозможности авторизации курьера с несуществующим логином")
     public void loginCourierIncorrectLoginFail() {
         Courier courierData = courierGenerator.getRandom();
         courierHelper.create(courierData);
@@ -72,6 +83,8 @@ public class CourierLoginTest {
 
 
     @Test
+    @DisplayName("Login courier with incorrect login")
+    @Description("Проверка невозможности авторизации курьера с несуществующим логином")
     public void loginCourierIncorrectPasswordFail() {
         Courier courierData = courierGenerator.getRandom();
         courierHelper.create(courierData);

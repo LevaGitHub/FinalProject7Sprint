@@ -1,5 +1,7 @@
 package ya.praktikum.model;
 
+import io.qameta.allure.Step;
+
 public class Courier {
     private String login;
     private String password;
@@ -14,14 +16,16 @@ public class Courier {
         this.firstName = firstName;
     }
 
+    @Step("Изменение логина курьера")
     public void setLogin(String login) {
         this.login = login;
     }
-
+    @Step("Изменение пароля курьера")
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @Step("Изменение Фамилии курьера")
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }

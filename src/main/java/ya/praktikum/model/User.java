@@ -1,5 +1,7 @@
 package ya.praktikum.model;
 
+import io.qameta.allure.Step;
+
 public class User {
     private String login;
     private String password;
